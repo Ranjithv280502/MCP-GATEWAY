@@ -75,6 +75,7 @@ async def health():
         "status": "ok" if registry.is_connected else "degraded",
         "connected": registry.is_connected,
         "tool_count": registry.tool_count,
+        "server_health": registry.server_health,
         "boot_info": getattr(app.state, "boot_info", {}),
     }
 
@@ -114,18 +115,16 @@ async def list_all_tools(user: TokenData = Depends(get_current_user)):
 @app.post("/tools/search")
 async def search_tools(req: ToolSearchRequest, user: TokenData = Depends(get_current_user)):
     registry = get_registry()
-    results = registry.search_tools(req.query, req.top_k)
+    results = registry.search_tools(req.query, req.top_k, caller=user.email)
     filtered = []
     for tool in results:
-        ok, reason = registry.rbac.is_allowed(user.email, tool["name"])
-        if ok:
-            filtered.append({
-                "name": tool["name"],
-                "description": tool.get("description", ""),
-                "relevance_score": tool.get("relevance_score", 0),
-                "namespace": tool.get("namespace"),
-                "server_id": tool.get("server_id"),
-            })
+        filtered.append({
+            "name": tool["name"],
+            "description": tool.get("description", ""),
+            "relevance_score": tool.get("relevance_score", 0),
+            "namespace": tool.get("namespace"),
+            "server_id": tool.get("server_id"),
+        })
     savings = registry.semantic.estimate_token_savings(req.top_k)
     return {
         "query": req.query,
@@ -138,7 +137,7 @@ async def search_tools(req: ToolSearchRequest, user: TokenData = Depends(get_cur
 @app.post("/tools/call")
 async def call_tool(req: ToolCallRequest, user: TokenData = Depends(get_current_user)):
     registry = get_registry()
-    result = await registry.invoke_tool(req.tool_name, req.arguments, user.email)
+    result = await registry.invoke_tool(req.tool_name, req.arguments, user.email, roles=user.roles)
     if not result.get("success") and result.get("decision") in ("denied", "rate_limited"):
         status_code = 429 if result.get("decision") == "rate_limited" else 403
         raise HTTPException(status_code=status_code, detail=result)
@@ -153,11 +152,12 @@ async def get_audit_log(
     limit: int = Query(default=50, le=500),
     user: TokenData = Depends(get_current_user),
 ):
-    if "admin" not in user.roles and "analyst" not in user.roles:
+    if "admin" not in user.roles and "sre" not in user.roles:
         caller = user.email
     registry = get_registry()
     entries = await registry.audit.query(caller, tool_name, decision, limit)
-    return {"entries": entries, "stats": registry.audit.stats()}
+    stats = await registry.audit.stats()
+    return {"entries": entries, "stats": stats}
 
 
 @app.get("/admin/collisions")
@@ -173,9 +173,10 @@ async def admin_stats(user: TokenData = Depends(get_current_user)):
     if "admin" not in user.roles:
         raise HTTPException(status_code=403, detail="Admin only")
     registry = get_registry()
+    stats = await registry.audit.stats()
     return {
         "tool_count": registry.tool_count,
-        "audit": registry.audit.stats(),
+        "audit": stats,
         "token_savings": registry.semantic.estimate_token_savings(),
         "collisions": len(registry.collision.get_collisions()),
     }

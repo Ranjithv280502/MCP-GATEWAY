@@ -4,22 +4,58 @@ gateway:
   namespace_separator: "."
 
 downstream_servers:
+  - id: filesystem
+    command: npx
+    args: ["-y", "@modelcontextprotocol/server-filesystem", "./data/workspace"]
+    namespace: fs
+    optional: false
+
+  - id: fetch
+    command: npx
+    args: ["-y", "@modelcontextprotocol/server-fetch"]
+    namespace: fetch
+    optional: false
+
+  - id: github
+    command: npx
+    args: ["-y", "@modelcontextprotocol/server-github"]
+    namespace: github
+    optional: true
+    env:
+      GITHUB_PERSONAL_ACCESS_TOKEN: "${GITHUB_TOKEN}"
+
+  - id: postgres
+    command: npx
+    args: ["-y", "@modelcontextprotocol/server-postgres", "${POSTGRES_MCP_URL}"]
+    namespace: postgres
+    optional: true
+
+  - id: gitlab
+    command: python
+    args: ["-m", "servers.gitlab_sim.server"]
+    namespace: gitlab
+    optional: false
+
   - id: schema_validation
     command: python
     args: ["-m", "servers.schema_validation.server"]
     namespace: schema
+    optional: false
 
   - id: data_ops
     command: python
     args: ["-m", "servers.data_ops.server"]
     namespace: data
+    optional: false
 
   - id: analytics
     command: python
     args: ["-m", "servers.analytics.server"]
     namespace: analytics
+    optional: false
 
   - id: workflow
     command: python
     args: ["-m", "servers.workflow.server"]
     namespace: workflow
+    optional: false

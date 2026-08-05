@@ -1,13 +1,58 @@
 version: "3.8"
 
 services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: gateway
+      POSTGRES_PASSWORD: gateway
+      POSTGRES_DB: mcp_gateway
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gateway -d mcp_gateway"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  postgres-tools:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: gateway
+      POSTGRES_PASSWORD: gateway
+      POSTGRES_DB: tools
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gateway -d tools"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   mcp-gateway:
     build: .
     ports:
       - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      postgres-tools:
+        condition: service_healthy
     volumes:
       - ./config:/app/config:ro
       - ./data:/app/data
     environment:
       - JWT_SECRET=change-me-in-production
       - GATEWAY_PORT=8080
+      - POSTGRES_DSN=postgresql://gateway:gateway@postgres:5432/mcp_gateway
+      - POSTGRES_MCP_URL=postgresql://gateway:gateway@postgres-tools:5432/tools
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - MCP_GATEWAY_ROOT=/app
+      - PYTHONPATH=/app
+
+volumes:
+  pgdata:

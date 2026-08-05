@@ -1,146 +1,202 @@
 [
   {
+    "query": "Read the contents of config/settings.yaml from the workspace",
+    "expected_tools": ["fs.read_text_file"]
+  },
+  {
+    "query": "Write deployment notes to a new file in the workspace",
+    "expected_tools": ["fs.write_file"]
+  },
+  {
+    "query": "List all files in the data workspace root directory",
+    "expected_tools": ["fs.list_directory"]
+  },
+  {
+    "query": "Search workspace files matching the *.json glob pattern",
+    "expected_tools": ["fs.search_files"]
+  },
+  {
+    "query": "Show a recursive directory tree under the logs folder",
+    "expected_tools": ["fs.directory_tree"]
+  },
+  {
+    "query": "Create a new backups directory in the workspace",
+    "expected_tools": ["fs.create_directory"]
+  },
+  {
+    "query": "Get metadata and file size for README.md in workspace",
+    "expected_tools": ["fs.get_file_info"]
+  },
+  {
+    "query": "Move archived report from temp folder to archive folder",
+    "expected_tools": ["fs.move_file"]
+  },
+  {
+    "query": "Edit line 42 in application config with an updated timeout value",
+    "expected_tools": ["fs.edit_file"]
+  },
+  {
+    "query": "Fetch and retrieve content from https://api.example.com/docs",
+    "expected_tools": ["fetch.fetch"]
+  },
+  {
+    "query": "Open a GitHub issue in owner/repo reporting a login authentication bug",
+    "expected_tools": ["github.create_issue"]
+  },
+  {
+    "query": "Create a GitLab issue in project group/platform about CI pipeline failure",
+    "expected_tools": ["gitlab.create_issue"]
+  },
+  {
+    "query": "Search GitHub repositories for MCP gateway starter projects",
+    "expected_tools": ["github.search_repositories"]
+  },
+  {
+    "query": "Get README file contents from GitHub repository octocat/Hello-World",
+    "expected_tools": ["github.get_file_contents"]
+  },
+  {
+    "query": "List open GitHub issues for repository demo/mobile-app",
+    "expected_tools": ["github.list_issues"]
+  },
+  {
+    "query": "Create a GitHub pull request from feature/auth branch to main",
+    "expected_tools": ["github.create_pull_request"]
+  },
+  {
+    "query": "List recent commits on GitHub repository main branch",
+    "expected_tools": ["github.list_commits"]
+  },
+  {
+    "query": "Create a new release branch on GitHub repository acme/web-app",
+    "expected_tools": ["github.create_branch"]
+  },
+  {
+    "query": "Push updated Helm chart files to GitHub repository deploy branch",
+    "expected_tools": ["github.push_files"]
+  },
+  {
+    "query": "Open a GitLab merge request from feature/login to main branch",
+    "expected_tools": ["gitlab.create_merge_request"]
+  },
+  {
+    "query": "Search GitLab projects matching keyword analytics dashboard",
+    "expected_tools": ["gitlab.search_repositories"]
+  },
+  {
+    "query": "Get .gitlab-ci.yml file contents from GitLab project web/backend",
+    "expected_tools": ["gitlab.get_file_contents"]
+  },
+  {
+    "query": "List opened GitLab issues for project platform/api-service",
+    "expected_tools": ["gitlab.list_issues"]
+  },
+  {
+    "query": "Create release-2.4 branch on GitLab project billing/service",
+    "expected_tools": ["gitlab.create_branch"]
+  },
+  {
+    "query": "List commits on GitLab project deploy branch",
+    "expected_tools": ["gitlab.list_commits"]
+  },
+  {
+    "query": "Push updated Terraform files to GitLab project infra/prod branch",
+    "expected_tools": ["gitlab.push_files"]
+  },
+  {
+    "query": "Create a new private GitLab repository for the payments microservice",
+    "expected_tools": ["gitlab.create_repository"]
+  },
+  {
+    "query": "Fork GitLab project open-source/sdk into my team namespace",
+    "expected_tools": ["gitlab.fork_repository"]
+  },
+  {
+    "query": "Run SQL query to count active users in the postgres database",
+    "expected_tools": ["postgres.query"]
+  },
+  {
     "query": "Validate a User record against strict schema profile",
     "expected_tools": ["schema.validate_profile_strict", "schema.validate_user"]
-  },
-  {
-    "query": "Search for Order records by customer name",
-    "expected_tools": ["data.search_order", "data.get_order"]
-  },
-  {
-    "query": "Calculate monthly recurring revenue for the billing dashboard",
-    "expected_tools": ["analytics.calculate_mrr"]
   },
   {
     "query": "Validate a batch of records in a single payload",
     "expected_tools": ["schema.validate_batch"]
   },
   {
-    "query": "Trigger webhook delivery to external endpoint",
-    "expected_tools": ["workflow.trigger_webhook"]
+    "query": "Validate Order record structure and required fields",
+    "expected_tools": ["schema.validate_order", "schema.validate_required_fields"]
   },
   {
-    "query": "Calculate customer churn rate over last quarter",
-    "expected_tools": ["analytics.calculate_churn_rate"]
+    "query": "Validate Payment record structure against base schema",
+    "expected_tools": ["schema.validate_payment"]
   },
   {
-    "query": "Create a new Product record in the database",
-    "expected_tools": ["data.create_product"]
-  },
-  {
-    "query": "Validate Task record required fields and structure",
-    "expected_tools": ["schema.validate_task", "schema.validate_required_fields"]
-  },
-  {
-    "query": "Generate usage report for date range",
-    "expected_tools": ["analytics.generate_report"]
-  },
-  {
-    "query": "Send email notification to user",
-    "expected_tools": ["workflow.send_email", "workflow.send_notification"]
-  },
-  {
-    "query": "Validate Invoice record schema and required fields",
-    "expected_tools": ["schema.validate_invoice"]
-  },
-  {
-    "query": "Calculate daily active users metric",
-    "expected_tools": ["analytics.calculate_dau"]
-  },
-  {
-    "query": "Bulk export User records since last sync",
-    "expected_tools": ["data.bulk_export"]
-  },
-  {
-    "query": "Validate references between related records",
+    "query": "Validate references between related records in incoming payload",
     "expected_tools": ["schema.validate_references"]
   },
   {
-    "query": "Detect anomaly in API error rate metric",
-    "expected_tools": ["analytics.detect_anomaly"]
-  },
-  {
-    "query": "Schedule a background job for data processing",
-    "expected_tools": ["workflow.schedule_job"]
-  },
-  {
-    "query": "Validate Webhook payload against webhook-payload profile",
-    "expected_tools": ["schema.validate_profile_webhook_payload", "schema.validate_webhook"]
-  },
-  {
-    "query": "Calculate p99 latency from trace data",
-    "expected_tools": ["analytics.calculate_latency_p99"]
+    "query": "Search for Order records by customer name",
+    "expected_tools": ["data.search_order", "data.get_order"]
   },
   {
     "query": "Get a single Customer record by ID",
     "expected_tools": ["data.get_customer"]
   },
   {
-    "query": "Run workflow automation for onboarding steps",
-    "expected_tools": ["workflow.run_workflow", "workflow.create_workflow"]
+    "query": "Create a new Product record in the database",
+    "expected_tools": ["data.create_product"]
   },
   {
-    "query": "Validate schema version field on incoming record",
-    "expected_tools": ["schema.validate_schema_version"]
+    "query": "Bulk export User records since last sync timestamp",
+    "expected_tools": ["data.bulk_export"]
   },
   {
-    "query": "Aggregate Order data grouped by day",
-    "expected_tools": ["analytics.aggregate_data"]
+    "query": "Count how many Task records exist in the datastore",
+    "expected_tools": ["data.count_records"]
+  },
+  {
+    "query": "Patch an existing Task record with a partial status update",
+    "expected_tools": ["data.patch_task"]
+  },
+  {
+    "query": "Calculate monthly recurring revenue for the billing dashboard",
+    "expected_tools": ["analytics.calculate_mrr"]
+  },
+  {
+    "query": "Calculate customer churn rate over the last quarter",
+    "expected_tools": ["analytics.calculate_churn_rate"]
+  },
+  {
+    "query": "Detect anomaly in API error rate metric over the past week",
+    "expected_tools": ["analytics.detect_anomaly"]
+  },
+  {
+    "query": "Generate usage report for the selected date range",
+    "expected_tools": ["analytics.generate_report"]
+  },
+  {
+    "query": "Calculate p99 latency from distributed trace data",
+    "expected_tools": ["analytics.calculate_latency_p99"]
   },
   {
     "query": "Compare conversion rate between two time periods",
     "expected_tools": ["analytics.compare_periods", "analytics.calculate_conversion_rate"]
   },
   {
-    "query": "Validate Payment record structure",
-    "expected_tools": ["schema.validate_payment"]
+    "query": "Trigger webhook delivery to external partner endpoint",
+    "expected_tools": ["workflow.trigger_webhook"]
   },
   {
-    "query": "Count how many Task records exist",
-    "expected_tools": ["data.count_records"]
+    "query": "Send email notification to user about account verification",
+    "expected_tools": ["workflow.send_email", "workflow.send_notification"]
   },
   {
-    "query": "Forecast revenue trend for next 30 days",
-    "expected_tools": ["analytics.forecast_trend"]
+    "query": "Run workflow automation for customer onboarding steps",
+    "expected_tools": ["workflow.run_workflow", "workflow.create_workflow"]
   },
   {
-    "query": "Register webhook for order.created events",
-    "expected_tools": ["workflow.register_webhook"]
-  },
-  {
-    "query": "Validate public-api profile for mobile client payload",
-    "expected_tools": ["schema.validate_profile_public_api"]
-  },
-  {
-    "query": "Calculate net promoter score from survey responses",
-    "expected_tools": ["analytics.calculate_nps"]
-  },
-  {
-    "query": "Patch an existing Task record with partial update",
-    "expected_tools": ["data.patch_task"]
-  },
-  {
-    "query": "Export dashboard as PDF report",
-    "expected_tools": ["analytics.export_dashboard"]
-  },
-  {
-    "query": "Cancel a running background job",
-    "expected_tools": ["workflow.cancel_job"]
-  },
-  {
-    "query": "Validate Subscription record against base schema",
-    "expected_tools": ["schema.validate_subscription"]
-  },
-  {
-    "query": "Build signup funnel drop-off analysis",
-    "expected_tools": ["analytics.build_funnel", "analytics.calculate_signup_funnel"]
-  },
-  {
-    "query": "Send push notification to mobile device",
-    "expected_tools": ["workflow.send_push"]
-  },
-  {
-    "query": "Rank top customers by lifetime value metric",
-    "expected_tools": ["analytics.rank_entities", "analytics.calculate_ltv"]
+    "query": "Schedule a background job for nightly data processing",
+    "expected_tools": ["workflow.schedule_job"]
   }
 ]

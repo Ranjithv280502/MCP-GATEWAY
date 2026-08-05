@@ -3,44 +3,58 @@ roles:
     allowed_tools: ["*"]
     description: Full access to all gateway tools
 
-  developer:
+  engineer:
     allowed_tools:
+      - "fs.*"
+      - "fetch.*"
+      - "github.search_*"
+      - "github.get_*"
+      - "github.create_issue"
+      - "github.create_pull_request"
+      - "github.list_*"
+      - "postgres.query"
       - "schema.*"
       - "data.search_*"
       - "data.get_*"
-      - "data.create_*"
-      - "workflow.send_*"
-      - "workflow.trigger_webhook"
-    description: Schema validation, data read/write, basic workflow actions
+    description: Read/write code, files, GitHub issues, and data search
 
-  analyst:
+  sre:
     allowed_tools:
+      - "fs.read_*"
+      - "fs.list_*"
+      - "fetch.*"
+      - "postgres.query"
       - "analytics.*"
+      - "workflow.run_*"
+      - "workflow.get_*"
+    description: Read-only infra, metrics, and workflow status
+
+  readonly:
+    allowed_tools:
+      - "fs.read_*"
+      - "fs.list_*"
+      - "fetch.fetch"
+      - "github.search_*"
+      - "github.get_*"
+      - "github.list_*"
       - "data.search_*"
       - "data.get_*"
-      - "data.count_records"
-    description: Analytics, metrics, and read-only data access
-
-  operator:
-    allowed_tools:
-      - "workflow.*"
-      - "data.bulk_*"
       - "analytics.generate_report"
-    description: Workflow automation and operational tasks
+    description: Read-only access across file, GitHub, and data tools
 
 users:
   admin@example.com:
     roles: [admin]
     password_hash: "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oQKJ8qKqKqKq"
 
-  dev@example.com:
-    roles: [developer]
+  engineer@example.com:
+    roles: [engineer]
     password_hash: "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oQKJ8qKqKqKq"
 
-  analyst@example.com:
-    roles: [analyst]
+  sre@example.com:
+    roles: [sre]
     password_hash: "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oQKJ8qKqKqKq"
 
-  ops@example.com:
-    roles: [operator]
+  readonly@example.com:
+    roles: [readonly]
     password_hash: "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oQKJ8qKqKqKq"

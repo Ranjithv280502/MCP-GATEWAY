@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "mcp-gateway": {
+      "command": "python",
+      "args": ["-m", "gateway.mcp_server"],
+      "env": {
+        "MCP_GATEWAY_ROOT": "${workspaceFolder}",
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    }
+  }
+}
