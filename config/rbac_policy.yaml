@@ -1,0 +1,46 @@
+roles:
+  admin:
+    allowed_tools: ["*"]
+    description: Full access to all gateway tools
+
+  developer:
+    allowed_tools:
+      - "schema.*"
+      - "data.search_*"
+      - "data.get_*"
+      - "data.create_*"
+      - "workflow.send_*"
+      - "workflow.trigger_webhook"
+    description: Schema validation, data read/write, basic workflow actions
+
+  analyst:
+    allowed_tools:
+      - "analytics.*"
+      - "data.search_*"
+      - "data.get_*"
+      - "data.count_records"
+    description: Analytics, metrics, and read-only data access
+
+  operator:
+    allowed_tools:
+      - "workflow.*"
+      - "data.bulk_*"
+      - "analytics.generate_report"
+    description: Workflow automation and operational tasks
+
+users:
+  admin@example.com:
+    roles: [admin]
+    password_hash: "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oQKJ8qKqKqKq"
+
+  dev@example.com:
+    roles: [developer]
+    password_hash: "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oQKJ8qKqKqKq"
+
+  analyst@example.com:
+    roles: [analyst]
+    password_hash: "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oQKJ8qKqKqKq"
+
+  ops@example.com:
+    roles: [operator]
+    password_hash: "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oQKJ8qKqKqKq"

@@ -1,0 +1,25 @@
+gateway:
+  name: mcp-gateway
+  semantic_top_k: 8
+  namespace_separator: "."
+
+downstream_servers:
+  - id: schema_validation
+    command: python
+    args: ["-m", "servers.schema_validation.server"]
+    namespace: schema
+
+  - id: data_ops
+    command: python
+    args: ["-m", "servers.data_ops.server"]
+    namespace: data
+
+  - id: analytics
+    command: python
+    args: ["-m", "servers.analytics.server"]
+    namespace: analytics
+
+  - id: workflow
+    command: python
+    args: ["-m", "servers.workflow.server"]
+    namespace: workflow

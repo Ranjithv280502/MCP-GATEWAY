@@ -1,0 +1,15 @@
+{
+  "total_queries": 36,
+  "total_tools": 243,
+  "top_k": 8,
+  "naive_accuracy_pct": 91.7,
+  "semantic_accuracy_pct": 100.0,
+  "avg_first_hit_rank": 1.25,
+  "token_savings": {
+    "total_tools": 243,
+    "top_k": 8,
+    "all_tools_tokens": 1570,
+    "filtered_tokens": 51,
+    "reduction_factor": 30.8
+  }
+}

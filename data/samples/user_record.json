@@ -1,0 +1,8 @@
+{
+  "type": "User",
+  "id": "user-001",
+  "schemaVersion": "2024-01",
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "status": "active"
+}

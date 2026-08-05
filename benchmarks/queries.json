@@ -1,0 +1,146 @@
+[
+  {
+    "query": "Validate a User record against strict schema profile",
+    "expected_tools": ["schema.validate_profile_strict", "schema.validate_user"]
+  },
+  {
+    "query": "Search for Order records by customer name",
+    "expected_tools": ["data.search_order", "data.get_order"]
+  },
+  {
+    "query": "Calculate monthly recurring revenue for the billing dashboard",
+    "expected_tools": ["analytics.calculate_mrr"]
+  },
+  {
+    "query": "Validate a batch of records in a single payload",
+    "expected_tools": ["schema.validate_batch"]
+  },
+  {
+    "query": "Trigger webhook delivery to external endpoint",
+    "expected_tools": ["workflow.trigger_webhook"]
+  },
+  {
+    "query": "Calculate customer churn rate over last quarter",
+    "expected_tools": ["analytics.calculate_churn_rate"]
+  },
+  {
+    "query": "Create a new Product record in the database",
+    "expected_tools": ["data.create_product"]
+  },
+  {
+    "query": "Validate Task record required fields and structure",
+    "expected_tools": ["schema.validate_task", "schema.validate_required_fields"]
+  },
+  {
+    "query": "Generate usage report for date range",
+    "expected_tools": ["analytics.generate_report"]
+  },
+  {
+    "query": "Send email notification to user",
+    "expected_tools": ["workflow.send_email", "workflow.send_notification"]
+  },
+  {
+    "query": "Validate Invoice record schema and required fields",
+    "expected_tools": ["schema.validate_invoice"]
+  },
+  {
+    "query": "Calculate daily active users metric",
+    "expected_tools": ["analytics.calculate_dau"]
+  },
+  {
+    "query": "Bulk export User records since last sync",
+    "expected_tools": ["data.bulk_export"]
+  },
+  {
+    "query": "Validate references between related records",
+    "expected_tools": ["schema.validate_references"]
+  },
+  {
+    "query": "Detect anomaly in API error rate metric",
+    "expected_tools": ["analytics.detect_anomaly"]
+  },
+  {
+    "query": "Schedule a background job for data processing",
+    "expected_tools": ["workflow.schedule_job"]
+  },
+  {
+    "query": "Validate Webhook payload against webhook-payload profile",
+    "expected_tools": ["schema.validate_profile_webhook_payload", "schema.validate_webhook"]
+  },
+  {
+    "query": "Calculate p99 latency from trace data",
+    "expected_tools": ["analytics.calculate_latency_p99"]
+  },
+  {
+    "query": "Get a single Customer record by ID",
+    "expected_tools": ["data.get_customer"]
+  },
+  {
+    "query": "Run workflow automation for onboarding steps",
+    "expected_tools": ["workflow.run_workflow", "workflow.create_workflow"]
+  },
+  {
+    "query": "Validate schema version field on incoming record",
+    "expected_tools": ["schema.validate_schema_version"]
+  },
+  {
+    "query": "Aggregate Order data grouped by day",
+    "expected_tools": ["analytics.aggregate_data"]
+  },
+  {
+    "query": "Compare conversion rate between two time periods",
+    "expected_tools": ["analytics.compare_periods", "analytics.calculate_conversion_rate"]
+  },
+  {
+    "query": "Validate Payment record structure",
+    "expected_tools": ["schema.validate_payment"]
+  },
+  {
+    "query": "Count how many Task records exist",
+    "expected_tools": ["data.count_records"]
+  },
+  {
+    "query": "Forecast revenue trend for next 30 days",
+    "expected_tools": ["analytics.forecast_trend"]
+  },
+  {
+    "query": "Register webhook for order.created events",
+    "expected_tools": ["workflow.register_webhook"]
+  },
+  {
+    "query": "Validate public-api profile for mobile client payload",
+    "expected_tools": ["schema.validate_profile_public_api"]
+  },
+  {
+    "query": "Calculate net promoter score from survey responses",
+    "expected_tools": ["analytics.calculate_nps"]
+  },
+  {
+    "query": "Patch an existing Task record with partial update",
+    "expected_tools": ["data.patch_task"]
+  },
+  {
+    "query": "Export dashboard as PDF report",
+    "expected_tools": ["analytics.export_dashboard"]
+  },
+  {
+    "query": "Cancel a running background job",
+    "expected_tools": ["workflow.cancel_job"]
+  },
+  {
+    "query": "Validate Subscription record against base schema",
+    "expected_tools": ["schema.validate_subscription"]
+  },
+  {
+    "query": "Build signup funnel drop-off analysis",
+    "expected_tools": ["analytics.build_funnel", "analytics.calculate_signup_funnel"]
+  },
+  {
+    "query": "Send push notification to mobile device",
+    "expected_tools": ["workflow.send_push"]
+  },
+  {
+    "query": "Rank top customers by lifetime value metric",
+    "expected_tools": ["analytics.rank_entities", "analytics.calculate_ltv"]
+  }
+]

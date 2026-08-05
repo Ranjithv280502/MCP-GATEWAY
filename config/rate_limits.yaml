@@ -1,0 +1,20 @@
+default:
+  requests_per_minute: 60
+  burst: 10
+
+per_tool:
+  schema.validate_batch:
+    requests_per_minute: 30
+    burst: 5
+
+  workflow.trigger_webhook:
+    requests_per_minute: 20
+    burst: 3
+
+  data.bulk_export:
+    requests_per_minute: 5
+    burst: 1
+
+  workflow.send_email:
+    requests_per_minute: 15
+    burst: 2

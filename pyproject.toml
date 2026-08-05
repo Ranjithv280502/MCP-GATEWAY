@@ -1,0 +1,9 @@
+[project]
+name = "mcp-gateway"
+version = "1.0.0"
+description = "Generic MCP Gateway with semantic tool search, RBAC, audit logging, and rate limiting"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

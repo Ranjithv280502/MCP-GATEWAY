@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  mcp-gateway:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config:/app/config:ro
+      - ./data:/app/data
+    environment:
+      - JWT_SECRET=change-me-in-production
+      - GATEWAY_PORT=8080
