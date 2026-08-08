@@ -11,10 +11,10 @@ downstream_servers:
     optional: false
 
   - id: fetch
-    command: npx
-    args: ["-y", "@modelcontextprotocol/server-fetch"]
+    command: python
+    args: ["-m", "mcp_server_fetch"]
     namespace: fetch
-    optional: false
+    optional: true
 
   - id: github
     command: npx
