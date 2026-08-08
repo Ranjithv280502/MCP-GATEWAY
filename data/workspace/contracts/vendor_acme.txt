@@ -1,0 +1,5 @@
+# Vendor contract — synthetic sample for filesystem MCP demos
+Vendor: Acme Corp
+Contract ID: VND-2024-1042
+Section 4.2: Liability cap exceeds standard procurement limit ($2M vs $500K policy max).
+Requires legal review before approval.

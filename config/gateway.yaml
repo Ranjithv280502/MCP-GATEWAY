@@ -5,8 +5,8 @@ gateway:
 
 downstream_servers:
   - id: filesystem
-    command: npx
-    args: ["-y", "@modelcontextprotocol/server-filesystem", "./data/workspace"]
+    command: python
+    args: ["-m", "servers.filesystem_local.server"]
     namespace: fs
     optional: false
 
@@ -17,18 +17,16 @@ downstream_servers:
     optional: true
 
   - id: github
-    command: npx
-    args: ["-y", "@modelcontextprotocol/server-github"]
+    command: python
+    args: ["-m", "servers.github_sim.server"]
     namespace: github
-    optional: true
-    env:
-      GITHUB_PERSONAL_ACCESS_TOKEN: "${GITHUB_TOKEN}"
+    optional: false
 
   - id: postgres
-    command: npx
-    args: ["-y", "@modelcontextprotocol/server-postgres", "${POSTGRES_MCP_URL}"]
+    command: python
+    args: ["-m", "servers.postgres_sim.server"]
     namespace: postgres
-    optional: true
+    optional: false
 
   - id: gitlab
     command: python

@@ -42,6 +42,30 @@ roles:
       - "analytics.generate_report"
     description: Read-only access across file, GitHub, and data tools
 
+  researcher:
+    allowed_tools:
+      - "fs.read_*"
+      - "fs.list_*"
+      - "data.search_*"
+      - "data.get_*"
+    description: Swarm researcher — read files and search policy corpus
+
+  analyst:
+    allowed_tools:
+      - "fs.read_*"
+      - "fs.list_*"
+      - "postgres.query"
+      - "data.get_*"
+    description: Swarm analyst — SQL + file cross-check
+
+  executor:
+    allowed_tools:
+      - "github.create_issue"
+      - "github.list_*"
+      - "data.create_*"
+      - "data.patch_*"
+    description: Swarm executor — GitHub issues and data writes
+
 users:
   admin@example.com:
     roles: [admin]
@@ -57,4 +81,16 @@ users:
 
   readonly@example.com:
     roles: [readonly]
+    password_hash: "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oQKJ8qKqKqKq"
+
+  researcher@example.com:
+    roles: [researcher]
+    password_hash: "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oQKJ8qKqKqKq"
+
+  analyst@example.com:
+    roles: [analyst]
+    password_hash: "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oQKJ8qKqKqKq"
+
+  executor@example.com:
+    roles: [executor]
     password_hash: "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oQKJ8qKqKqKq"
